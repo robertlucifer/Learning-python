@@ -15,6 +15,7 @@ class item:
         return self.price*self.quantity
     def applied_discount(self):
          self.price = self.price*self.discount
+    
 
 item1=item("phone", 2000, 3)
 item1.applied_discount()
