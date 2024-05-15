@@ -1,5 +1,4 @@
-import pdb
-pdb.set_trace()
+import csv
 class item:
     discount=0.8
     all=[]
@@ -22,12 +21,21 @@ class item:
         self.price=self.price*self.discount
     def __repr__(self)->str:#this is used by developers
         return f"item{self.name} and {self.price} and {self.quantity}"
+    
+    @classmethod
+    def instantiate_from_csv(cls,x):
+        with open(x,'r')as f:
+            reader=csv.DictReader(f)
+            items=list(reader)
+        
+        for item1 in items:
+            item(
+                name=item1.get('name'),
+                price=float(item1.get('price')),
+                quantity=int(item1.get('quantity'))
+            )
+            
 
-        return f"Item('{self.name}',{self.price}, {self.discount})"
-item1=item("phone",100,1)
-item2=item("Laptop",1000,3)
-item3=item("Cable",10,5)
-item4=item("Mouse",50,5)
-item5=item("Keyboard",75,5)
-
+item.instantiate_from_csv("items.csv")
 print(item.all)
+
