@@ -46,7 +46,22 @@ class item:
 # item.instantiate_from_csv("items.csv")
 # print(item.all)
 # print(item.is_integer(2.0))
-phone1=item("JscPhonev10",500,5)
-phone1.broken_phones=1
-phone2=item("JscPhonev20",700,5)
-phone2.broken_phones=1
+
+#child of item class
+class phone(item):
+    all=[]
+    def __init__(self,name:str,price:float,quantity=0,broken_phones=0):
+        #validating the values provided
+        super().__init__(
+            name,price, quantity
+        )
+        self.broken_phones=broken_phones
+        #action which is used to all the instance to a list
+        phone.all.append(self)
+        #or you can do item.all.append(self.name)    
+
+phone1=phone("JscPhonev10",500,5,1)
+print(phone1.total_amount())
+phone2=phone("JscPhonev20",700,5,1)
+
+print(phone.all)
